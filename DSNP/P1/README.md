@@ -6,7 +6,7 @@
   From the human point of view, there are mainly two groups involved in Airbnb's business, the hosts and the guests. They all care about price. My interesting here is to locate and compare several factors that correlated to price and to answer questions below:
 1. When we invest in real estate, we always emphasize location, so how much do loctaion affect rental prices?  
 2. We live in an era where it's very easy to get comments from other people, so how much do guest reviews affect rental prices?  
-3. If I have money to invest in a home stay facility, should I focus on location or improve the service to get good reviews? The reviews can be improved by host through better service while location can not. The answer to this question can help landlords decide whether to invest in the location or services.
+3. If I have money to invest in a home stay facility, should I focus on location choice or improve the service to get good reviews? 
 
 ### 2. Data Understanding
   I get dataset of "Seattle Airbnb Open Data" from https://www.kaggle.com/airbnb/seattle/data#listings.csv. It contains 3818 samples with 92 features. Kaggle provides preliminary basic data exploration. I pay attention to the location, reviews and price features. The significance, type, distribution, and missing values of them are understood.
