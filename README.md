@@ -3,4 +3,4 @@
 
  This repository contains all of the Udacity course projects I worked on.
 
- 1. **Data Scientist Nanodegree Program** (DSNP): in the DSNP folder. 
+ 1. [**Data Scientist Nanodegree Program**](https://github.com/forSimulation/Udacity/tree/master/DSNP) (DSNP): Full stack training for data scientists. 
