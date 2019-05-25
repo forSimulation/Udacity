@@ -3,7 +3,7 @@
 2. [Project Motivation](https://github.com/forSimulation/Udacity/tree/master/DSNP/P1#Project-Motivation)
 3. [File Descriptions](https://github.com/forSimulation/Udacity/tree/master/DSNP/P1#File-Descriptions)
 4. [Results](https://github.com/forSimulation/Udacity/tree/master/DSNP/P1#Results)
-5. [Acknowledgements]((https://github.com/forSimulation/Udacity/tree/master/DSNP/P1#Acknowledgements))
+5. [Acknowledgements](https://github.com/forSimulation/Udacity/tree/master/DSNP/P1#Acknowledgements)
 
 ## Installation
 In addition to Anaconda distribution of Python 3.7, you also need to install [tensorflow](https://tensorflow.google.com/) and [keras](https://keras.io/). They can all be easily installed by pip.
