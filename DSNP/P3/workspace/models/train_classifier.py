@@ -15,7 +15,8 @@ import re
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.model_selection import GridSearchCV
-from sklearn.e
+from sklearn.ensemble import AdaBoostClassifier
+import pickle
 import nltk
 # download files of NLTK
 nltk.download('stopwords')
@@ -35,7 +36,10 @@ def load_data(database_filepath):
     df = pd.read_sql_table('disasterResponse', engine)
     X = df['message']
     Y = df.loc[:, 'related':'direct_report']
-    return X, Y
+    
+    # names of categories
+    names = Y.columns.tolist()
+    return X, Y, names
 
 def tokenize(text):
     """
@@ -52,7 +56,7 @@ def tokenize(text):
     # Reduce words to their stems
     stemmed = [PorterStemmer().stem(w) for w in words]
     # Reduce words to their root form
-    lemmed = [WordNetLemmatizer().lemmatize(w) for w in words]
+    lemmed = [WordNetLemmatizer().lemmatize(w) for w in stemmed]
     # Lemmatize verbs by specifying pos
     lemmed = [WordNetLemmatizer().lemmatize(w, pos='v') for w in lemmed]
     return lemmed
@@ -60,23 +64,17 @@ def tokenize(text):
 def build_model():
     """
     Using pipline to build AdaBoost model to classfy messages.
-    grid search is used to determine parameters.
+    grid search has already been used to determine super parameters.
     Input: none
     Output: optimal model
     """
     pipeline =  Pipeline([
-        ('vect', CountVectorizer(tokenizer=tokenize)),
+        ('vect', CountVectorizer(tokenizer=tokenize, ngram_range=(1, 2))),
         ('tfidf', TfidfTransformer()),
-        ('clf', MultiOutputClassifier(AdaBoostClassifier(random_state=6)))
+        ('clf', MultiOutputClassifier(AdaBoostClassifier(random_state=6, learning_rate=0.5, n_estimators=220), n_jobs=8))
     ])
-    # grid search 
-    parameters = {
-    'vect__ngram_range': ((1, 2),(1, 3)),
-    'clf__estimator__learning_rate': (0.5, 0.1),
-    'clf__estimator__n_estimators': (160, 220)
-    }
-    cv = GridSearchCV(pipeline, param_grid=parameters, n_jobs=8)
-    return cv
+
+    return pipeline
 
 def evaluate_model(model, X_test, Y_test, category_names):
     """
@@ -97,12 +95,12 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 def save_model(model, model_filepath):
     """
-    Export your model as a pickle file 
+    Export machine learning model as a pickle file 
     Input: model: model to be saved, model_filepath: saved file path 
     Output: pickle file of model.
     """
     file = open(model_filepath, 'wb')
-    pickle.dump(cv, file)
+    pickle.dump(model, file)
 
 def main():
     if len(sys.argv) == 3:
