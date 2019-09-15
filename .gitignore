@@ -105,3 +105,5 @@ venv.bak/
 
 # larger files more than 100m are not permited by github.
 bottleneck_features/DogVGG16Data.npz
+dogImages
+lfw
