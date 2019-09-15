@@ -102,3 +102,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# larger files more than 100m are not permited by github.
+DogVGG16Data.npz
